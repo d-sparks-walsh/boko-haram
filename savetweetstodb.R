@@ -1,5 +1,5 @@
-# AUthor: Dennis Walsh
-# Last Updated: Sept 30, 2016
+# Author: Dennis Walsh
+# Last Updated: October 4, 2016
 # This function takes:
 #       1) A vector of search terms to be searched for each location
 #       2) An existing dataset of tweets where results can be appended
@@ -17,21 +17,20 @@ savetweetstodb <- function(searchterms = NULL,
                 }
         # Otherwise, load in dataset as dataframe
         else {
-                tweets <- load(appendtodataset)
+                load(appendtodataset)
                 # Get ID of most recent tweet in dataset, so that search can be 
                 # limited to tweets more recent than those already in the 
                 # dataset
-                maxid <- max(tweets$id)
+                maxid <- as.numeric(max(tweets$id))
         }
         for (i in 1:length(searchterms)) {
                         # The first search uses geolocation
                 a <- searchTwitter(
                         #Get the current search term
-                        term[i],
+                        searchterms[i],
                         #Limit to 1000 tweets per term
                         n = 1000,
                         lang = 'en',
-                        r
                         sinceID = maxid)
                 # If the search returned results, convert the results to a 
                 # dataframe
